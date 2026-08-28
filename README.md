@@ -1,85 +1,125 @@
+<div align="center">
+
 # Rive Skill
 
-Production guidance for [Rive](https://rive.app) — the Editor, `.riv` files, State Machines, Data Binding/View Models, rigging, Layouts, scripting (Luau), Rive MCP, runtime integration, performance, and accessibility — packaged as an Agent Skill plus a portable prompt.
+### Production-ready Rive guidance for AI coding agents
 
-Built and maintained by **Praneeth Kawya Thathsara** — [uianimation.com](https://uianimation.com).
+Design, animate, structure, debug, optimize, and integrate interactive Rive experiences with clearer architecture and safer runtime handoff.
 
-## Why this exists
+<br>
 
-Rive evolves quickly, so model knowledge and copied SDK examples can become stale. This skill provides durable architecture rules, naming conventions, a debugging order, and a developer-handoff format while directing the agent to current official docs for version-sensitive behavior.
+<a href="https://github.com/uianimation/rive-skill/raw/refs/heads/main/SKILL.md" download="SKILL.md">
+  <img src="https://img.shields.io/badge/⬇_DOWNLOAD_SKILL.md-0D7CFF?style=for-the-badge&logoColor=white" alt="Download SKILL.md" height="56">
+</a>
 
-## Included formats
+<br><br>
 
-| File | Use with | What it is |
+[![Rive](https://img.shields.io/badge/Rive-Editor_%26_Runtime-1B1B1F?style=flat-square)](https://rive.app)
+[![Agent Skill](https://img.shields.io/badge/Agent_Skill-Ready-22C55E?style=flat-square)](SKILL.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=flat-square)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.4.0-8B5CF6?style=flat-square)](SKILL.md)
+
+**Maintained by [Praneeth Kawya Thathsara](https://uianimation.com)**
+
+</div>
+
+---
+
+## What this skill does
+
+Rive changes quickly, and copied SDK examples or generic model knowledge can become stale. This skill gives AI agents a maintainable way to approach real Rive work while directing them to current official documentation for version-sensitive behavior.
+
+| Authoring | Interaction | Integration |
 |---|---|---|
-| **`SKILL.md`** | Codex and other Agent Skills-compatible clients | The concise entry point with YAML metadata and routing to focused references. |
-| **`references/*.md`** | Agent Skills-compatible clients | Deeper guidance loaded only when a task needs it. |
-| **`rive-instructions.md`** | AI tools with a system-prompt or persistent-context field | Portable copy of the entry point without YAML frontmatter. Include relevant reference files when deeper guidance is needed. |
+| Artboards, timelines, rigging, components, Layouts, assets | State Machines, listeners, Data Binding, View Models, converters | Runtimes, renderers, scripting, Rive MCP, performance, accessibility |
 
-Regenerate the portable file after changing `SKILL.md`:
+It also defines semantic naming, runtime contracts, a practical debugging order, QA expectations, and a developer-handoff format.
 
-```powershell
-./scripts/build-portable.ps1
-```
+## Quick start
 
-## Installing
+### 1. Download
 
-### Codex
+Use the large button above or [download **SKILL.md** directly](https://github.com/uianimation/rive-skill/raw/refs/heads/main/SKILL.md).
 
-Copy the `rive` folder into your personal or project skill directory, then invoke it as `$rive` or let Codex select it when a Rive request matches the description.
+> Keep the complete repository when possible. The focused files in [<code>references/</code>](references/) provide deeper guidance that the main skill loads only when relevant.
 
-Install the skill folder in Codex:
+### 2. Install in Codex
 
-```bash
-# personal (all projects)
+~~~bash
+# Personal — available in every project
 cp -r rive-skill ~/.codex/skills/rive
 
-# project-level (one repo)
+# Project-level — available in one repository
 cp -r rive-skill .codex/skills/rive
-```
+~~~
 
-The skill triggers automatically whenever a task matches its `description`.
+Invoke it explicitly as <code>$rive</code>, or let Codex select it automatically when a request matches the skill description.
 
-### Other Agent Skills clients
+### 3. Use with other AI tools
 
-Place the complete folder in that client's documented skill directory so `SKILL.md`, `references/`, and `agents/` stay together.
+| Client | Recommended file |
+|---|---|
+| Codex or another Agent Skills client | <code>SKILL.md</code> with the <code>references/</code> and <code>agents/</code> folders |
+| ChatGPT, Cursor, Gemini, or another prompt-based tool | <code>rive-instructions.md</code> |
 
-### ChatGPT
+Regenerate the portable instructions after editing <code>SKILL.md</code>:
 
-- **Custom GPT:** paste the full contents of `rive-instructions.md` into the GPT's "Instructions" field when creating/editing a Custom GPT.
-- **Custom Instructions (personal):** paste it into ChatGPT Settings → Personalization → Custom Instructions ("What would you like ChatGPT to know about you" / "How would you like ChatGPT to respond"), or keep it as a saved snippet you paste at the start of a Rive-focused conversation.
+~~~powershell
+./scripts/build-portable.ps1
+~~~
 
-### Cursor
+## Included files
 
-Save `rive-instructions.md` as (or append it into) your project's `.cursorrules` file, or add it under Cursor Settings → Rules.
+~~~text
+rive-skill/
+├── SKILL.md
+├── agents/
+│   └── openai.yaml
+├── references/
+│   ├── editor-authoring.md
+│   ├── interaction-data.md
+│   ├── scripting-ai-mcp.md
+│   ├── runtimes-performance-accessibility.md
+│   ├── runtime-handoff-checklist.md
+│   └── official-docs-map.md
+├── scripts/
+│   └── build-portable.ps1
+└── rive-instructions.md
+~~~
 
-### Any other AI tool with a system prompt / context field
+## Why the references are separate
 
-Paste `rive-instructions.md` in as-is. It's plain Markdown with no vendor-specific syntax.
+The main skill stays concise and routes the agent to deeper material only when needed. This reduces unnecessary context while keeping specialist guidance available for authoring, interaction, scripting, runtime integration, optimization, accessibility, and handoff.
 
-## What's inside
+## Need hands-on Rive animation support?
 
-- **Core operating rules** — verify version-sensitive claims, prefer Data Binding over legacy State Machine Inputs/Events, treat runtime-facing names as an API, don't fake editing a `.riv` file without real tooling, design per-runtime, keep app code semantic.
-- **Task workflow** — classify the task, establish the runtime contract (View Model schema), choose the simplest correct architecture, build for interruption/reversibility, test the real integration.
-- **Focused references** for authoring, interaction/data, scripting/AI/MCP, runtimes/performance/accessibility, handoff/QA, and official documentation.
-- **Naming conventions**, a developer-handoff format, a debugging order, and migration guidance for modernizing older files.
+### Hire a freelance Rive animator
 
-## A note on freshness
+Need a production-ready Rive animation, interactive State Machine, character rig, responsive component, or developer handoff completed for your product?
 
-Rive ships frequently. The `research-date` in `SKILL.md` records the last documentation review, while the skill directs agents to `https://rive.app/docs/llms.txt`, the feature-support matrix, the target runtime docs, and the changelog before making version-sensitive claims.
+<div align="center">
+
+<a href="https://riveanimator.com/">
+  <img src="https://img.shields.io/badge/HIRE_A_RIVE_ANIMATOR-Visit_riveanimator.com-EC4899?style=for-the-badge" alt="Hire a freelance Rive animator at riveanimator.com" height="48">
+</a>
+
+<br><br>
+
+**[Visit riveanimator.com →](https://riveanimator.com/)**
+
+</div>
+
+If you are looking to **hire a freelance Rive animator**, visit [riveanimator.com](https://riveanimator.com/) for professional Rive design, animation, interaction, and implementation support.
+
+## Freshness and verification
+
+The <code>research-date</code> in <code>SKILL.md</code> records the latest documentation review. For version-sensitive claims, the skill checks the official Rive documentation index, feature-support matrix, target-runtime documentation, and changelog instead of relying on remembered APIs.
 
 ## Contributing
 
-Contributions are welcome — especially:
-
-- Improving focused `references/*.md` guidance without duplicating the entry point.
-- Flagging anything that's gone stale as Rive ships new Editor/runtime releases.
-- Corrections from real production use (architecture patterns, gotchas, performance findings).
-- Format/compatibility notes for other AI tools not yet listed above.
-
-Please keep additions **concrete and testable** (exact names, property types, values, and a "why") rather than general advice — that's the standard the rest of the file holds itself to. See `CONTRIBUTING.md` for details.
+Corrections and focused improvements are welcome. Keep additions concrete, cite the relevant official Rive source, avoid duplicating shared rules across references, and see [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a change.
 
 ## License
 
-MIT — see `LICENSE`.
+Released under the [MIT License](LICENSE).
 
