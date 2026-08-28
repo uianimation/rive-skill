@@ -1,0 +1,8 @@
+interface:
+  display_name: "Rive"
+  short_description: "Build and integrate production-ready Rive graphics"
+  default_prompt: "Use $rive to design a maintainable Rive architecture and runtime handoff for this interaction."
+
+policy:
+  allow_implicit_invocation: true
+
