@@ -1,5 +1,7 @@
 # Runtime handoff and QA
 
+> Last verified against official Rive documentation: 2026-08-28.
+
 Use this reference when debugging an integration or delivering a Rive file to developers.
 
 ## Debugging order
@@ -39,4 +41,3 @@ Include:
 ## QA scenarios
 
 Verify initial load, slow or failed asset load, missing data, rapid repeated input, state reversal during a transition, multiple simultaneous reactions, component instances with different data contexts, smallest and largest supported layout, pointer and touch behavior, background/offscreen pause and resume, reduced motion, and representative low-end hardware.
-

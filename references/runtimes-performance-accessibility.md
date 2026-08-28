@@ -1,14 +1,18 @@
 # Runtimes, performance, and accessibility
 
+> Last verified against official Rive documentation: 2026-08-28. Re-check package versions and feature support before giving exact APIs.
+
 Use this reference for runtime and renderer choice, platform-specific API guidance, optimization, and accessible behavior.
 
 ## Runtime and renderer
 
 Rive supports Web JavaScript, React, React Native, Flutter, Apple, Android, Unity, Unreal, C++, and additional integrations. Use the current target-runtime docs for exact package names and API syntax.
 
-For React Native, distinguish the current stable release from beta runtime work. As of the research date, `@rive-app/react-native` v0.4 is the stable migration target and v0.5 is a beta built on the newer native runtimes. Prefer the documented async APIs, and migrate deprecated State Machine input, event, and direct text-run access to Data Binding. Verify the migration guide before recommending a version.
+For React Native, distinguish the current stable release from beta or experimental runtime work using the current migration guide. Prefer documented non-deprecated APIs, and migrate deprecated State Machine input, event, and direct text-run access to Data Binding when appropriate. Never recommend a version from memory.
 
-Rive Renderer generally offers the highest feature fidelity where available, but package and platform tradeoffs still matter. On web, distinguish Rive Renderer/WebGL2 packages, Canvas2D packages, and lite packages. Check the feature-support matrix before promising compatibility. Vector Feathering currently requires Rive Renderer specifically.
+Rive Renderer generally offers the highest feature fidelity where available, but package and platform tradeoffs still matter. On web, distinguish Rive Renderer/WebGL2 packages, Canvas2D packages, and lite packages. Check the current feature-support matrix for renderer-specific features instead of keeping a hard-coded list here.
+
+For loading, lifecycle, Data Binding, failure, and disposal patterns, read [runtime-integration-patterns.md](runtime-integration-patterns.md).
 
 ## Performance
 
@@ -30,4 +34,3 @@ Test on representative devices and with the intended number of simultaneous Rive
 - Branch deliberately in the State Machine. Reduced motion may mean shorter travel, gentler transitions, lower speed, or an alternate state path.
 - Preserve functional feedback when reducing decorative motion. Provide an equivalent status signal when motion itself communicates progress or state.
 - Test keyboard, focus, screen reader, touch-target, contrast, and reduced-motion behavior in the actual host application where relevant.
-

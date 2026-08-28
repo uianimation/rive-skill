@@ -1,8 +1,10 @@
 interface:
   display_name: "Rive"
   short_description: "Build and integrate production-ready Rive graphics"
-  default_prompt: "Use $rive to design a maintainable Rive architecture and runtime handoff for this interaction."
+  icon_small: "./assets/rive-skill-icon.svg"
+  icon_large: "./assets/rive-skill-icon.svg"
+  brand_color: "#0D7CFF"
+  default_prompt: "Use $rive to choose the simplest maintainable Rive architecture, verify what is possible, and prepare the runtime handoff."
 
 policy:
   allow_implicit_invocation: true
-

@@ -1,5 +1,7 @@
 # Editor authoring
 
+> Last verified against official Rive documentation: 2026-08-28.
+
 Use this reference for scene structure, import, animation, rigging, responsive layout, and reusable visual systems.
 
 ## Structure and naming
@@ -42,4 +44,3 @@ Do not over-rig rigid or static elements. Test deformations at extreme poses, no
 SVG import becomes editable Rive vector content. For Illustrator exports, prefer presentation attributes, disable Illustrator-editing metadata, simplify excessive vertices, and flatten unsupported effects when needed.
 
 Inspect SVG filters, skew transforms, clipping, embedded rasters, and AI-generated paths with excessive vertices. Keep raster assets near their display dimensions and optimize image, audio, and font payloads. Subset font glyphs when appropriate.
-

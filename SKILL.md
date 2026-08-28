@@ -1,10 +1,10 @@
 ---
 name: rive
-description: Design, animate, structure, debug, optimize, and integrate interactive Rive graphics. Use for the Rive Editor, .riv files, artboards, timelines, State Machines, Data Binding, View Models, components, layouts, rigging, scripting/Luau, shaders, Rive MCP, runtime integration, accessibility, and designer-to-developer handoff.
+description: Design, animate, structure, debug, optimize, or integrate interactive Rive graphics when the task needs Rive-specific authoring, architecture, tooling, or runtime guidance. Covers .riv files, State Machines, Data Binding, View Models, layouts, rigging, scripting/Luau, shaders, Rive MCP, runtimes, accessibility, and handoff. Do not use for generic animation comparisons or application work where Rive is only mentioned but no Rive-specific decision is required.
 license: MIT
 metadata:
   author: "Praneeth Kawya Thathsara (uianimation.com)"
-  version: "0.4.0"
+  version: "0.5.0"
   research-date: "2026-08-28"
   official-docs: "https://rive.app/docs/"
 ---
@@ -15,7 +15,7 @@ Help users produce maintainable, runtime-ready Rive work as a designer, animator
 
 This skill works with Agent Skills-compatible clients. Live `.riv` editing requires Rive Editor tooling such as Rive MCP; version-sensitive guidance requires current Rive documentation.
 
-Rive changes quickly. For version-sensitive claims or exact runtime APIs, consult the current official documentation, starting with `https://rive.app/docs/llms.txt`, the feature-support matrix, and the target runtime docs. Do not infer capability from an Editor build number alone.
+Rive changes quickly. For version-sensitive claims or exact runtime APIs, consult the current official documentation, starting with `https://rive.app/docs/llms.txt`, the feature-support matrix, and the target runtime docs. Do not infer capability from an Editor build number alone. If current documentation is unavailable, identify the time-sensitive assumption and label the affected guidance unverified.
 
 ## Core rules
 
@@ -26,6 +26,7 @@ Rive changes quickly. For version-sensitive claims or exact runtime APIs, consul
 5. Design for the named runtime, renderer, device class, input method, and accessibility needs. Never assume every Editor feature works in every runtime.
 6. Prefer the simplest native Rive mechanism that expresses the behavior. Add scripting only when timelines, State Machines, bindings, listeners, layouts, components, and constraints are insufficient.
 7. Keep application code semantic. Expose properties such as `activity`, `progress`, or `accentColor`; avoid coupling app code to internal groups, timeline details, bones, or transforms.
+8. Calibrate depth to the request. Answer a narrow beginner question directly; introduce a full production architecture only when the task needs one.
 
 ## Route the task
 
@@ -35,6 +36,7 @@ Read only the references relevant to the request:
 - State Machines, listeners, Data Binding, View Models, properties, and converters: [references/interaction-data.md](references/interaction-data.md)
 - Luau scripting, shaders, the Editor AI Agent, and Rive MCP: [references/scripting-ai-mcp.md](references/scripting-ai-mcp.md)
 - Runtime selection, renderer support, performance, and accessibility: [references/runtimes-performance-accessibility.md](references/runtimes-performance-accessibility.md)
+- Runtime loading, lifecycle, Data Binding, error, and disposal patterns by platform: [references/runtime-integration-patterns.md](references/runtime-integration-patterns.md)
 - Integration contract, debugging order, QA, and handoff: [references/runtime-handoff-checklist.md](references/runtime-handoff-checklist.md)
 - Current source-of-truth links: [references/official-docs-map.md](references/official-docs-map.md)
 
@@ -42,7 +44,7 @@ Read only the references relevant to the request:
 
 ### 1. Establish the requested outcome
 
-Identify the visual behavior, user interactions, app-controlled data, Rive-controlled outputs, target runtime, renderer constraints, responsive behavior, accessibility requirements, and performance budget. Preserve names and mappings already supplied by the user.
+Identify the visual behavior, user interactions, app-controlled data, Rive-controlled outputs, target runtime, renderer constraints, responsive behavior, accessibility requirements, and performance budget. Preserve names and mappings already supplied by the user. Ask for missing runtime or interaction details only when they materially change the answer.
 
 ### 2. Define the runtime contract
 
@@ -94,6 +96,12 @@ Test Editor preview, Data Binding preview, the actual runtime and renderer, real
 
 When tools are available, verify observable behavior rather than only checking that objects or names exist.
 
+Record evidence using these labels:
+
+- **Verified** — executed or previewed in the target Editor/runtime and the stated behavior was observed.
+- **Inspected** — configuration, hierarchy, bindings, code, or diagnostics were examined, but end-to-end behavior was not run.
+- **Unverified** — the required file, runtime, renderer, device, or current documentation was unavailable. State the exact remaining check.
+
 ## Output contract
 
 Give concrete implementation guidance, not “use a State Machine” without the graph or data contract. For substantial work include:
@@ -119,3 +127,4 @@ For handoff, include a compact table:
 
 Also state initial values, property directions, runtime and renderer requirements, external assets, responsive fit, reduced-motion behavior, and known platform limitations.
 
+End substantial implementation or debugging answers with the evidence label and the checks that support it.

@@ -1,5 +1,7 @@
 # Official documentation map
 
+> Link map reviewed: 2026-08-28. URLs and navigation can change; validate before release.
+
 Use official Rive documentation as the source of truth for current behavior and APIs.
 
 - Documentation index: https://rive.app/docs/llms.txt
@@ -24,4 +26,3 @@ Use official Rive documentation as the source of truth for current behavior and 
 - Changelog: https://rive.app/changelog
 
 Before giving exact SDK code, open the target runtime's current pages from the documentation index. Prefer a specific runtime page over examples remembered from an older package version.
-

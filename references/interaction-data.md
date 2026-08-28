@@ -1,5 +1,7 @@
 # Interaction and data
 
+> Last verified against official Rive documentation: 2026-08-28.
+
 Use this reference for State Machines, listeners, View Models, bindings, properties, lists, converters, and migration from legacy runtime inputs or events.
 
 ## View Models and bindings
@@ -52,4 +54,3 @@ General Events still have valid Editor-side uses, but listening to General Event
 - Do not replace simple object-to-object constraints with Data Binding unless shared or runtime data benefits.
 
 Migration should make the architecture clearer or safer, not merely newer.
-

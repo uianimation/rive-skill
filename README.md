@@ -17,7 +17,7 @@ Design, animate, structure, debug, optimize, and integrate interactive Rive expe
 [![Rive](https://img.shields.io/badge/Rive-Editor_%26_Runtime-1B1B1F?style=flat-square)](https://rive.app)
 [![Agent Skill](https://img.shields.io/badge/Agent_Skill-Ready-22C55E?style=flat-square)](SKILL.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4.0-8B5CF6?style=flat-square)](SKILL.md)
+[![Version](https://img.shields.io/badge/version-0.5.0-8B5CF6?style=flat-square)](SKILL.md)
 
 **Maintained by [Praneeth Kawya Thathsara](https://uianimation.com)**
 
@@ -60,13 +60,15 @@ Invoke it explicitly as <code>$rive</code>, or let Codex select it automatically
 | Client | Recommended file |
 |---|---|
 | Codex or another Agent Skills client | <code>SKILL.md</code> with the <code>references/</code> and <code>agents/</code> folders |
-| ChatGPT, Cursor, Gemini, or another prompt-based tool | <code>rive-instructions.md</code> |
+| ChatGPT, Cursor, Gemini, or another prompt-based tool | Complete bundled <code>rive-instructions.md</code> |
 
 Regenerate the portable instructions after editing <code>SKILL.md</code>:
 
 ~~~powershell
 ./scripts/build-portable.ps1
 ~~~
+
+The generated portable file contains the main skill and every focused reference, so prompt-based clients do not lose the deeper runtime or debugging guidance.
 
 ## Included files
 
@@ -75,21 +77,45 @@ rive-skill/
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
+├── assets/
+│   ├── rive-skill-icon.svg
+│   └── rive-skill-community-cover.png
+├── evals/
+│   └── behavioral-cases.md
 ├── references/
 │   ├── editor-authoring.md
 │   ├── interaction-data.md
 │   ├── scripting-ai-mcp.md
 │   ├── runtimes-performance-accessibility.md
+│   ├── runtime-integration-patterns.md
 │   ├── runtime-handoff-checklist.md
 │   └── official-docs-map.md
 ├── scripts/
-│   └── build-portable.ps1
+│   ├── build-portable.ps1
+│   └── validate-skill.ps1
 └── rive-instructions.md
 ~~~
 
 ## Why the references are separate
 
 The main skill stays concise and routes the agent to deeper material only when needed. This reduces unnecessary context while keeping specialist guidance available for authoring, interaction, scripting, runtime integration, optimization, accessibility, and handoff.
+
+## Validation
+
+Run the deterministic validation suite before committing:
+
+~~~powershell
+./scripts/build-portable.ps1
+./scripts/validate-skill.ps1
+~~~
+
+To include a live check of official documentation links:
+
+~~~powershell
+./scripts/validate-skill.ps1 -CheckExternalLinks
+~~~
+
+The suite checks frontmatter, reference routing, required resources, Codex UI metadata, portable-file drift, and the behavioral-evaluation manifest. The scenarios in [<code>evals/behavioral-cases.md</code>](evals/behavioral-cases.md) test decisions such as honest no-tool fallback, contract preservation, current runtime verification, partial MCP failure, and evidence labeling.
 
 ## Need hands-on Rive animation support?
 
@@ -122,4 +148,3 @@ Corrections and focused improvements are welcome. Keep additions concrete, cite 
 ## License
 
 Released under the [MIT License](LICENSE).
-
