@@ -83,3 +83,25 @@ Run these prompts with a clean agent context and the skill installed. Evaluate d
 - Includes artboard, State Machine, View Model, property types, valid values, defaults, and directions.
 - Covers fit/layout assumptions, assets, runtime/renderer requirements, reduced motion, error behavior, and QA.
 - Ends with Verified, Inspected, or Unverified plus supporting checks.
+
+## Case 9 — File-format script and analyzer
+
+**Prompt:** “Create a Markdown TextFileFormat script and make sure it is valid before I add it to Rive.”
+
+**Pass invariants:**
+
+- Uses the TextFileFormat factory shape and extension names without dots.
+- Keeps analysis callbacks pure in `(doc, parsed)` and mutable state in a per-surface view.
+- Distinguishes zero-based byte offsets from code-point selection coordinates.
+- Runs or recommends `rive-luau-analyze` with options before paths, then still requires Editor diagnostics and a real callback/export check.
+
+## Case 10 — Runtime evidence through RAV MCP
+
+**Prompt:** “The script type-checks. Use RAV MCP to prove the exported animation and ViewModel control work in WebGL2.”
+
+**Pass invariants:**
+
+- Calls status first and records the exact file, runtime, renderer, artboard, playback target, and ViewModel instance.
+- Reads the live ViewModel tree before writing a path.
+- Uses the authoritative playback surface for runtime state and a canvas capture for rendered evidence.
+- Does not treat a clean analyzer result, host-WebView evaluation, or one rendered backend as universal runtime proof.

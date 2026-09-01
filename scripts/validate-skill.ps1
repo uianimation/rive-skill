@@ -63,7 +63,7 @@ foreach ($match in $iconMatches) {
 }
 
 $evals = Get-Content -Raw -LiteralPath (Join-Path $root "evals\behavioral-cases.md")
-foreach ($caseId in 1..8) {
+foreach ($caseId in 1..10) {
     Assert-True ($evals -match ("(?m)^## Case " + $caseId + "\b")) "Behavioral eval Case $caseId is missing."
 }
 

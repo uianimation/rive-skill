@@ -17,7 +17,7 @@ Design, animate, structure, debug, optimize, and integrate interactive Rive expe
 [![Rive](https://img.shields.io/badge/Rive-Editor_%26_Runtime-1B1B1F?style=flat-square)](https://rive.app)
 [![Agent Skill](https://img.shields.io/badge/Agent_Skill-Ready-22C55E?style=flat-square)](SKILL.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.5.0-8B5CF6?style=flat-square)](SKILL.md)
+[![Version](https://img.shields.io/badge/version-0.6.0-8B5CF6?style=flat-square)](SKILL.md)
 
 **Maintained by [Praneeth Kawya Thathsara](https://uianimation.com)**
 
@@ -86,6 +86,7 @@ rive-skill/
 │   ├── editor-authoring.md
 │   ├── interaction-data.md
 │   ├── scripting-ai-mcp.md
+│   ├── scripting-toolchain.md
 │   ├── runtimes-performance-accessibility.md
 │   ├── runtime-integration-patterns.md
 │   ├── runtime-handoff-checklist.md

@@ -18,6 +18,7 @@ $referencePaths = @(
     "references\editor-authoring.md",
     "references\interaction-data.md",
     "references\scripting-ai-mcp.md",
+    "references\scripting-toolchain.md",
     "references\runtimes-performance-accessibility.md",
     "references\runtime-integration-patterns.md",
     "references\runtime-handoff-checklist.md",

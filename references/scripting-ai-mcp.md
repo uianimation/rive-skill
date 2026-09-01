@@ -1,12 +1,12 @@
 # Scripting, AI Agent, and Rive MCP
 
-> Last verified against official Rive documentation: 2026-08-28. Re-check MCP availability, endpoint, and supported operations before use.
+> Last verified against official Rive documentation and the public toolchain: 2026-09-01. Re-check MCP availability, endpoint, and supported operations before use.
 
 Use this reference when built-in Rive systems are insufficient or when an AI tool is expected to inspect or modify a live Rive file.
 
 ## Scripting
 
-Rive scripts use typed Luau and run in the Editor and supported runtimes. Choose the narrowest protocol before writing code. Current protocol families include Node, Layout, Converter, Path Effect, Transition Condition, Listener Action, Blank/helper, and Test. Rive also supports file-format-related scripts and WGSL shaders for advanced use cases.
+Rive scripts use typed Luau and run in the Editor and supported runtimes. Choose the narrowest protocol before writing code. Current protocol families include Node, Layout, Converter, Path Effect, Transition Condition, Listener Action, Interpolator, Blank/helper, Test, FileFormat, and TextFileFormat. Rive also supports WGSL shaders for advanced use cases.
 
 - Prefer built-in State Machines, Data Binding, Layouts, listeners, and constraints where they are sufficient.
 - Give scripts typed Inputs instead of hidden access to unrelated scene objects.
@@ -16,6 +16,8 @@ Rive scripts use typed Luau and run in the Editor and supported runtimes. Choose
 - Use Test scripts for reusable logic.
 - Check the Debug Panel, diagnostics, console output, and tests before declaring success.
 - Keep a script's primary type name aligned with its PascalCase script name.
+
+For protocol signatures, file-format scripts, static analysis, LSP setup, and target-runtime validation, read [scripting-toolchain.md](scripting-toolchain.md).
 
 ## Editor AI Agent versus Rive MCP
 
@@ -37,3 +39,5 @@ When MCP is available:
 If an edit partially succeeds and the intended behavior cannot be restored with the available operations, stop, preserve the diagnostics and current state, and give exact recovery steps. Never hide a partial failure.
 
 If MCP is unavailable, do not claim to have edited the `.riv` file. Give precise Editor steps, names, values, connections, and verification instructions instead.
+
+Rive Editor MCP and RAV MCP serve different roles. Editor MCP can inspect or modify the open source file. RAV MCP is an optional public runtime-validation layer for opening an exported `.riv`, inspecting live ViewModel paths, driving playback, switching renderers, and capturing the rendered canvas. A successful RAV run does not prove that an Editor mutation was saved; an Editor diagnostic does not prove exported runtime pixels.
