@@ -1,6 +1,6 @@
 # Rive Luau scripting toolchain
 
-> Verified 2026-09-01 against current Rive Editor declarations, Rive Web 2.41.0, C++ runtime-v0.1.316, the public Rive Luau LSP toolchain, and RAV MCP. Re-check live declarations and releases for version-sensitive work.
+> Verified 2026-09-01 against current Rive Editor declarations, Rive Web 2.41.1, C++ runtime-v0.1.344, the public Rive Luau LSP toolchain, and RAV MCP. Re-check live declarations and releases for version-sensitive work.
 
 Use this reference when authoring or reviewing Rive Luau, file-format scripts, or exported runtime behavior. Keep static typing, Editor execution, exported runtime execution, and rendered pixels as separate evidence.
 
@@ -137,12 +137,12 @@ A focused sequence is:
 
 RAV MCP validates an exported runtime instance. It does not edit or save the source `.riv`, replace Editor diagnostics, or prove platforms and renderers that were not run.
 
-## Released target and future-source boundary
+## Released target and source boundary
 
-As of this verification, Rive Web 2.41.0 embeds C++ runtime-v0.1.316. Later runtime-v0.1.344 source is future evidence, not the runtime inside that Web package.
+As of this verification, Rive Web 2.41.1 embeds C++ runtime-v0.1.344. The released runtime tag and current runtime main commit are the same revision, so there is no later canary delta to treat as released behavior.
 
 - Web 2.41 single-state-machine integrations prefer singular `stateMachine`; plural `stateMachines` remains relevant for legacy and multi-machine cases.
-- Runtime 316 dispatches `Layout.resize(self, size)`. Later source carries `Layout.resize(self, size, scale)`. Do not require `scale` for a runtime-316 target.
-- Runtime 341 repairs compatibility for layout-controlled text authored before file format 7.3. Because Web 2.41 embeds runtime 316, test affected older text assets in every selected renderer instead of assuming the later repair is present.
+- Runtime 344 carries `Layout.resize(self, size, scale)` and preserves compatibility with existing two-argument callbacks. Code that uses `scale` still needs a runtime tier that proves the three-argument form.
+- Runtime 341 introduced a compatibility repair for layout-controlled text authored before file format 7.3, and Web 2.41.1 includes it through runtime 344. Keep an older-file fixture in renderer tests so the compatibility path remains observed rather than assumed.
 
 Always separate the released target, the current Editor, and later source snapshots when an API or behavior differs.
