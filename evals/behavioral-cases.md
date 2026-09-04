@@ -105,3 +105,4 @@ Run these prompts with a clean agent context and the skill installed. Evaluate d
 - Reads the live ViewModel tree before writing a path.
 - Uses the authoritative playback surface for runtime state and a canvas capture for rendered evidence.
 - Does not treat a clean analyzer result, host-WebView evaluation, or one rendered backend as universal runtime proof.
+- If RAV or the required MCP tools are unavailable, says the runtime check is unverified instead of inventing access or evidence.

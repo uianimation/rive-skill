@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: "Praneeth Kawya Thathsara (uianimation.com)"
   version: "0.6.0"
-  research-date: "2026-09-01"
+  research-date: "2026-09-04"
   official-docs: "https://rive.app/docs/"
 ---
 

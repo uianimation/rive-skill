@@ -239,7 +239,7 @@ Migration should make the architecture clearer or safer, not merely newer.
 
 # Scripting, AI Agent, and Rive MCP
 
-> Last verified against official Rive documentation and the public toolchain: 2026-09-01. Re-check MCP availability, endpoint, and supported operations before use.
+> Last verified against official Rive documentation and the public toolchain: 2026-09-04. Re-check MCP availability, endpoint, and supported operations before use.
 
 Use this reference when built-in Rive systems are insufficient or when an AI tool is expected to inspect or modify a live Rive file.
 
@@ -285,7 +285,7 @@ Rive Editor MCP and RAV MCP serve different roles. Editor MCP can inspect or mod
 
 # Rive Luau scripting toolchain
 
-> Verified 2026-09-01 against current Rive Editor declarations, Rive Web 2.41.1, C++ runtime-v0.1.344, the public Rive Luau LSP toolchain, and RAV MCP. Re-check live declarations and releases for version-sensitive work.
+> Verified 2026-09-04 against the current public Rive scripting documentation and the publicly released Rive Luau LSP and RAV toolchains. Re-check live declarations and releases for version-sensitive work.
 
 Use this reference when authoring or reviewing Rive Luau, file-format scripts, or exported runtime behavior. Keep static typing, Editor execution, exported runtime execution, and rendered pixels as separate evidence.
 
@@ -368,26 +368,35 @@ Keep these boundaries:
 
 ## Static analyzer and LSP
 
-The public [Rive Luau LSP](https://github.com/ivg-design/rive-luau-lsp) packages Rive declarations with two wrappers:
+The public [Rive Luau LSP](https://github.com/ivg-design/rive-luau-lsp) release archives package Rive declarations with two wrappers:
 
 - `rive-luau-analyze` runs one-shot static analysis.
 - `rive-luau-lsp` starts the language server over stdio for an editor or agent client.
 
-From a release archive, keep the binary, wrappers, definitions, and documentation together:
+Download the `rive-luau-cli-*.zip` archive for the host from the [releases page](https://github.com/ivg-design/rive-luau-lsp/releases). Keep the binary, wrappers, definitions, and documentation together after extraction. If no archive matches the host architecture, build the project from source using its current README instead of borrowing a binary from another platform.
+
+On macOS or Linux:
 
 ```bash
+unzip rive-luau-cli-*.zip -d rive-luau-cli
+cd rive-luau-cli
+chmod 755 luau-lsp rive-luau-analyze rive-luau-lsp
+
 ./rive-luau-analyze --formatter=plain path/to/script.luau
 ./rive-luau-lsp
 ```
 
-From a source checkout:
+On Windows PowerShell, invoke the packaged binary with the same definitions and strict-mode settings used by the wrappers:
 
-```bash
-./bin/rive/rive-luau-analyze --formatter=plain path/to/script.luau
-./bin/rive/rive-luau-lsp
+```powershell
+.\luau-lsp.exe analyze `
+  --definitions=@rive=.\rive-globals.d.luau `
+  --flag:LuauSolverV2=true `
+  --force-strict-mode `
+  path\to\script.luau
 ```
 
-Put every analyzer option before the first file or directory path. Configure `rive-luau-lsp` itself as the stdio command; do not append another `lsp` subcommand. A clean analyzer result proves only compatibility with the declarations bundled in that release. It does not execute the script, register a file format in the Editor, load an exported asset, or render a frame.
+Put every analyzer option before the first file or directory path. Configure `rive-luau-lsp` itself as the stdio command; do not append another `lsp` subcommand. The analyzer wrapper exits `0` only for a clean result, `1` when diagnostics are present, and otherwise propagates the underlying process failure. A clean analyzer result proves only compatibility with the declarations bundled in that release. It does not execute the script, register a file format in the Editor, load an exported asset, or render a frame.
 
 When analyzer and Editor diagnostics disagree, compare the analyzer's bundled declarations with the live Editor scripting reference. Record the mismatch rather than changing valid current code to satisfy an older declaration bundle.
 
@@ -409,7 +418,7 @@ Label results as Verified, Inspected, or Unverified and name the evidence suppor
 
 ## Optional RAV MCP runtime checks
 
-[Rive Animation Viewer](https://github.com/ivg-design/rive-animation-viewer) provides an optional public MCP server for exported `.riv` runtime inspection. Use it after Editor work when the task needs live runtime or renderer evidence.
+[Rive Animation Viewer](https://github.com/ivg-design/rive-animation-viewer) provides an optional public MCP server for exported `.riv` runtime inspection. Configure it through the desktop app's MCP Setup dialog and use the launcher path and port reported there. Use this workflow only when RAV is installed and running, its MCP bridge is configured in the current client, and the required tools are discoverable. Otherwise skip this layer and report the runtime check as unverified.
 
 A focused sequence is:
 
@@ -417,20 +426,11 @@ A focused sequence is:
 2. Open or switch to the intended file and playback target when necessary.
 3. Call `rav_get_vm_tree` before addressing a property. List paths are live and use zero-based index segments; refresh the tree after a list changes size.
 4. Use typed tools such as `rav_vm_get`, `rav_vm_set`, and `rav_vm_fire` to exercise the contract.
-5. Use `rav_capture_canvas` for rendered PNG evidence and repeat in each renderer that matters.
-6. Use `rav_eval` only when a dedicated tool cannot answer the question and Script Access is explicitly enabled. Prefer `target: playback` for runtime state; `target: host` inspects the UI WebView and can differ from the authoritative playback child.
+5. Read `rav_get_event_log` after the interaction for runtime and Rive event evidence. An empty result means no matching output was observed; it does not prove that a script never ran.
+6. Use `rav_capture_canvas` for rendered PNG evidence and repeat in each renderer that matters.
+7. Use `rav_eval` only when a dedicated tool cannot answer the question and Script Access is explicitly enabled. Prefer `target: playback` for runtime state; `target: host` inspects the UI WebView and can differ from the authoritative playback child.
 
-RAV MCP validates an exported runtime instance. It does not edit or save the source `.riv`, replace Editor diagnostics, or prove platforms and renderers that were not run.
-
-## Released target and source boundary
-
-As of this verification, Rive Web 2.41.1 embeds C++ runtime-v0.1.344. The released runtime tag and current runtime main commit are the same revision, so there is no later canary delta to treat as released behavior.
-
-- Web 2.41 single-state-machine integrations prefer singular `stateMachine`; plural `stateMachines` remains relevant for legacy and multi-machine cases.
-- Runtime 344 carries `Layout.resize(self, size, scale)` and preserves compatibility with existing two-argument callbacks. Code that uses `scale` still needs a runtime tier that proves the three-argument form.
-- Runtime 341 introduced a compatibility repair for layout-controlled text authored before file format 7.3, and Web 2.41.1 includes it through runtime 344. Keep an older-file fixture in renderer tests so the compatibility path remains observed rather than assumed.
-
-Always separate the released target, the current Editor, and later source snapshots when an API or behavior differs.
+RAV MCP validates an exported runtime instance. It does not edit or save the source `.riv`, replace Editor diagnostics, expose the Editor's Luau console, or prove platforms and renderers that were not run. Always separate the released target, the current Editor, and later source snapshots when an API or behavior differs.
 
 ---
 

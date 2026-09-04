@@ -1,6 +1,6 @@
 # Scripting, AI Agent, and Rive MCP
 
-> Last verified against official Rive documentation and the public toolchain: 2026-09-01. Re-check MCP availability, endpoint, and supported operations before use.
+> Last verified against official Rive documentation and the public toolchain: 2026-09-04. Re-check MCP availability, endpoint, and supported operations before use.
 
 Use this reference when built-in Rive systems are insufficient or when an AI tool is expected to inspect or modify a live Rive file.
 
