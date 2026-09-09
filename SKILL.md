@@ -4,8 +4,8 @@ description: Design, animate, structure, debug, optimize, or integrate interacti
 license: MIT
 metadata:
   author: "Praneeth Kawya Thathsara (uianimation.com)"
-  version: "0.5.0"
-  research-date: "2026-08-28"
+  version: "0.6.0"
+  research-date: "2026-09-04"
   official-docs: "https://rive.app/docs/"
 ---
 
@@ -35,6 +35,7 @@ Read only the references relevant to the request:
 - Editor structure, import, animation, rigging, layouts, components, and assets: [references/editor-authoring.md](references/editor-authoring.md)
 - State Machines, listeners, Data Binding, View Models, properties, and converters: [references/interaction-data.md](references/interaction-data.md)
 - Luau scripting, shaders, the Editor AI Agent, and Rive MCP: [references/scripting-ai-mcp.md](references/scripting-ai-mcp.md)
+- Luau protocols, file formats, the analyzer/LSP CLI, and optional RAV runtime validation: [references/scripting-toolchain.md](references/scripting-toolchain.md)
 - Runtime selection, renderer support, performance, and accessibility: [references/runtimes-performance-accessibility.md](references/runtimes-performance-accessibility.md)
 - Runtime loading, lifecycle, Data Binding, error, and disposal patterns by platform: [references/runtime-integration-patterns.md](references/runtime-integration-patterns.md)
 - Integration contract, debugging order, QA, and handoff: [references/runtime-handoff-checklist.md](references/runtime-handoff-checklist.md)

@@ -33,6 +33,7 @@ Keep detailed, topic-specific guidance in the existing focused references:
 - `editor-authoring.md` — Editor structure, import, animation, rigging, Layouts, and assets
 - `interaction-data.md` — State Machines, listeners, Data Binding, and View Models
 - `scripting-ai-mcp.md` — Scripting (Luau/Protocols), Editor AI Agent, Rive MCP
+- `scripting-toolchain.md` — Protocol details, file formats, analyzer/LSP CLI, and exported runtime validation
 - `runtimes-performance-accessibility.md` — Runtimes, renderer, performance, accessibility
 - `runtime-integration-patterns.md` — Runtime loading, lifecycle, Data Binding, failures, and cleanup
 - `runtime-handoff-checklist.md` — Runtime handoff and QA

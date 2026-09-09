@@ -18,6 +18,13 @@ Use official Rive documentation as the source of truth for current behavior and 
 - Debug Panel: https://rive.app/docs/scripting/debugging/debug-panel
 - Editor AI Agent: https://rive.app/docs/editor/ai-agent/ai-agent
 - Rive MCP: https://rive.app/docs/editor/ai/mcp
+- FileFormat protocol: https://rive.app/docs/scripting/api-reference/file-format/file-format
+- TextFileFormat protocol: https://rive.app/docs/scripting/api-reference/file-format/text-file-format
+
+## Public companion tools
+
+- Rive Luau LSP and analyzer releases: https://github.com/ivg-design/rive-luau-lsp/releases
+- Rive Animation Viewer and RAV MCP: https://github.com/ivg-design/rive-animation-viewer
 - Runtime overview: https://rive.app/docs/runtimes/getting-started
 - Renderer selection: https://rive.app/docs/runtimes/choose-a-renderer/overview
 - React Native migration: https://rive.app/docs/runtimes/react-native/migration-guide
