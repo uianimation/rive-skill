@@ -37,7 +37,7 @@ Maintained by Praneeth Kawya Thathsara — https://uianimation.com
 '@
 
 $sections = [System.Collections.Generic.List[string]]::new()
-$sections.Add((ConvertTo-Lf $preamble) + $body.TrimEnd())
+$sections.Add((ConvertTo-Lf $preamble).TrimEnd() + ($lf * 2) + $body.TrimEnd())
 $separator = ($lf * 2) + "---" + ($lf * 2)
 
 foreach ($relativePath in $referencePaths) {
@@ -57,7 +57,7 @@ if ($Check) {
         throw "Portable output is missing: $OutputPath"
     }
 
-    $actual = Get-Content -Raw -LiteralPath $OutputPath
+    $actual = ConvertTo-Lf (Get-Content -Raw -LiteralPath $OutputPath)
     if ($actual -ne $expected) {
         throw "Portable output is stale. Run scripts/build-portable.ps1."
     }
